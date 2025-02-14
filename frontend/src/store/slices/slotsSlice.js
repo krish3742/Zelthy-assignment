@@ -33,9 +33,7 @@ export const slotsSlice = createSlice({
     },
     clearSlots: (state, action) => {
       const { username, date } = action.payload;
-      console.log(username, date);
       if (state.slots[username] && state.slots[username][date]) {
-        console.log("he");
         delete state.slots[username][date];
       }
     },
