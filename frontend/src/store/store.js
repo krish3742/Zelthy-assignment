@@ -1,9 +1,21 @@
 import { configureStore } from "@reduxjs/toolkit";
+import { persistStore, persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
+import slotsReducer from "./slices/slotsSlice";
 import userReducer from "./slices/userSlice";
 
-const store = configureStore({
+const persistConfig = {
+  key: "root",
+  storage,
+};
+
+const persistedSlotsReducer = persistReducer(persistConfig, slotsReducer);
+const persistedUserReducer = persistReducer(persistConfig, userReducer);
+
+export const store = configureStore({
   reducer: {
-    user: userReducer,
+    slots: persistedSlotsReducer,
+    user: persistedUserReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
@@ -11,4 +23,4 @@ const store = configureStore({
     }),
 });
 
-export default store;
+export const persistor = persistStore(store);
