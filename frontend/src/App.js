@@ -1,18 +1,19 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Provider } from "react-redux";
-import { PersistGate } from "redux-persist/integration/react";
-import { store, persistor } from "./store/store";
 import { useSelector } from "react-redux";
-import { ThemeProvider } from "@mui/material/styles";
-import { lightTheme, darkTheme } from "./theme";
 import { SnackbarProvider } from "notistack";
-import { LocalizationProvider } from "@mui/x-date-pickers";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { store, persistor } from "./store/store";
 import CssBaseline from "@mui/material/CssBaseline";
+import { ThemeProvider } from "@mui/material/styles";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { PersistGate } from "redux-persist/integration/react";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
+import Login from "./components/Login";
 import Navbar from "./components/Navbar";
 import Dashboard from "./components/Dashboard";
+import { lightTheme, darkTheme } from "./theme";
 import UserProfile from "./components/UserProfile";
-import Login from "./components/Login";
 import PrivateRoute from "./components/PrivateRoute";
 
 function AppContent() {
