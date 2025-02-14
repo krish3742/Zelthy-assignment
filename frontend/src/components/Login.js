@@ -1,6 +1,10 @@
 "use client";
 
 import { useState } from "react";
+import { useSnackbar } from "notistack";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { setUser } from "../store/slices/userSlice";
 import {
   Container,
   Paper,
@@ -11,10 +15,18 @@ import {
 } from "@mui/material";
 
 function Login() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { enqueueSnackbar } = useSnackbar();
   const [username, setUsername] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (username.trim()) {
+      dispatch(setUser(username.trim()));
+      enqueueSnackbar("Logged in successfully!", { variant: "success" });
+      navigate("/");
+    }
   };
 
   return (
@@ -62,7 +74,7 @@ function Login() {
                 size="large"
                 fullWidth
               >
-                Continue
+                Login
               </Button>
             </Box>
           </form>

@@ -26,34 +26,45 @@ function Dashboard() {
   const dispatch = useDispatch();
   const { enqueueSnackbar } = useSnackbar();
   const [selectedDate, setSelectedDate] = useState(dayjs());
+  const bookedSlots = useSelector((state) => state.slots.global);
   const { currentUser, timezone } = useSelector((state) => state.user);
-  const slots = useSelector((state) => state.slots.slots[currentUser] || {});
+  const userSlots = useSelector(
+    (state) => state.slots.userBookings[currentUser] || {}
+  );
 
   const timeSlots = [
-    "09:00",
-    "09:30",
-    "10:00",
-    "10:30",
-    "11:00",
-    "11:30",
-    "12:00",
-    "12:30",
-    "13:00",
-    "13:30",
-    "14:00",
-    "14:30",
-    "15:00",
-    "15:30",
-    "16:00",
-    "16:30",
-    "17:00",
-    "17:30",
+    "09:00 AM",
+    "09:30 AM",
+    "10:00 AM",
+    "10:30 AM",
+    "11:00 AM",
+    "11:30 AM",
+    "12:00 PM",
+    "12:30 PM",
+    "01:00 PM",
+    "01:30 PM",
+    "02:00 PM",
+    "02:30 PM",
+    "03:00 PM",
+    "03:30 PM",
+    "04:00 PM",
+    "04:30 PM",
+    "05:00 PM",
+    "05:30 PM",
   ];
 
   const formattedDate = selectedDate.format("YYYY-MM-DD");
-  const selectedSlots = slots[formattedDate] || [];
+  const selectedSlots = userSlots[formattedDate] || [];
+
+  const isSlotBooked = (time) => {
+    return bookedSlots[formattedDate]?.includes(time);
+  };
 
   const handleSlotToggle = (time) => {
+    if (isSlotBooked(time) && !selectedSlots.includes(time)) {
+      enqueueSnackbar("Slot is already booked", { variant: "error" });
+      return;
+    }
     const slotIndex = selectedSlots.indexOf(time);
 
     if (slotIndex === -1) {
@@ -63,7 +74,7 @@ function Dashboard() {
       enqueueSnackbar("Slot added successfully", { variant: "success" });
     } else {
       dispatch(
-        removeSlot({ username: currentUser, date: formattedDate, slotIndex })
+        removeSlot({ username: currentUser, date: formattedDate, slot: time })
       );
       enqueueSnackbar("Slot removed successfully", { variant: "info" });
     }
@@ -113,7 +124,7 @@ function Dashboard() {
               <Button
                 variant="outlined"
                 onClick={() => handleClearSlots()}
-                disabled={slots[formattedDate] ? false : true}
+                disabled={userSlots[formattedDate] ? false : true}
               >
                 Clear slots
               </Button>
@@ -127,6 +138,9 @@ function Dashboard() {
                     onChange={() => handleSlotToggle(time)}
                     fullWidth
                     sx={{ py: 1 }}
+                    disabled={
+                      isSlotBooked(time) && !selectedSlots.includes(time)
+                    }
                   >
                     {time}
                   </ToggleButton>
@@ -150,7 +164,7 @@ function Dashboard() {
               Copy Availability
             </Typography>
             <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
-              {Object.keys(slots).map((date) => (
+              {Object.keys(userSlots).map((date) => (
                 <Button
                   key={date}
                   variant="outlined"
