@@ -1,70 +1,146 @@
-# Getting Started with Create React App
+# Slot Booking System (Frontend)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is a Slot Booking System built with **Create React App**. It allows users to manage and book time slots while ensuring that no two users can book the same slot on the same date. The system tracks each user's bookings, preserving them even after re-login.
+
+---
+
+## Features
+
+- **User-specific Slot Tracking:** Keeps a record of each user's booked slots.
+- **Global Slot Availability:** Prevents double booking of the same slot on the same date.
+- **Add, Remove, Copy, and Clear Slots:** Manage availability with ease.
+- **Persistent State Management:** Utilizes Redux Toolkit and Redux Persist to maintain state across sessions.
+- **Responsive UI:** Built with Material-UI and Date Pickers for a modern and user-friendly interface.
+- **Theme Toggle (Light/Dark Mode):** Switch between light and dark themes for better user experience.
+- **Timezone Selection:** Allows users to select their timezone, ensuring accurate slot display.
+
+---
+
+## Tech Stack
+
+- **React** (Create React App)
+- **React Router** for routing
+- **Redux Toolkit** for state management
+- **Redux Persist** for persisting state across sessions
+- **Material-UI** for UI components
+- **Dayjs** for date manipulation
+- **Notistack** for notifications
+
+---
+
+## Installation and Setup
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/krish3742/Zelthy-assignment.git
+   cd frontend
+   ```
+
+2. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+3. Start the development server:
+   ```bash
+   npm start
+   ```
+
+The application will be accessible at `http://localhost:3000`.
+
+---
+
+## Folder Structure
+
+```
+Zelthy-assignment/
+│
+├── frontend/
+    └── src
+        ├── components
+        │   ├── Navbar.js
+        │   ├── Dashboard.js
+        │   ├── UserProfile.js
+        │   ├── PrivateRoute.js
+        |   └── Login.js
+        │
+        ├── store
+        │   ├── slices
+        │   │   ├── userSlice.js
+        │   │   └── slotsSlice.js
+        │   └── store.js
+        │
+        ├── theme.js
+        └── App.js
+```
+
+---
+
+## State Management Overview
+
+This project uses **Redux Toolkit** for state management and **Redux Persist** for persisting the state across browser reloads. The state is organized into two slices:
+
+### 1. **User Slice**
+
+- Stores the current user's information, including the username and timezone.
+
+### 2. **Slots Slice**
+
+- Tracks global slot availability and each user's booked slots.
+- Ensures no overlapping bookings across all users.
+
+---
+
+## Routing
+
+**React Router** is used for navigation:
+
+- `/login` - Login Page
+- `/` - Dashboard (Protected Route)
+- `/profile` - User Profile (Protected Route)
+
+---
 
 ## Available Scripts
 
 In the project directory, you can run:
 
-### `npm start`
+- **`npm start`** - Runs the app in development mode.
+- **`npm run build`** - Builds the app for production.
+- **`npm test`** - Launches the test runner.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Dependencies
 
-### `npm test`
+- **React** (v18+)
+- **Redux Toolkit** (v1.9+)
+- **Redux Persist** (v6+)
+- **Material-UI** (v5+)
+- **Dayjs** (v1.11+)
+- **Notistack** (v2+)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## Contributing
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature-name`).
+3. Make your changes.
+4. Commit your changes (`git commit -m 'Add some feature'`).
+5. Push to the branch (`git push origin feature-name`).
+6. Open a pull request.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## License
 
-### `npm run eject`
+This project is licensed under the MIT License.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+---
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Contact
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+For any inquiries, please contact **Kshitij Agrawal**.
